@@ -28,3 +28,13 @@ func (n *Node) insert(value int) {
 	var rootLen = len(n.root)
 	fmt.Printf("Node size: %d\n", rootLen)
 }
+
+func (n *Node) hasSpaceInRoot() bool {
+	for i := 0; i < len(n.root); i++ {
+		if n.root[i] == nil {
+			return true
+		}
+	}
+
+	return false
+}
