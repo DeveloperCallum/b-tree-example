@@ -38,3 +38,36 @@ func (n *Node) hasSpaceInRoot() bool {
 
 	return false
 }
+
+func (n *Node) insertIntoRootArr(value int) {
+	if n.hasSpaceInRoot() {
+		for i := 0; i < len(n.root); i++ {
+			arrValue := n.root[i] //5
+
+			if value >= *arrValue { //insert
+
+			}
+		}
+	}
+}
+
+func (n *Node) shift(value int) {
+	for i := len(n.root) - 2; i >= 0; i-- {
+		node := n.root[i]
+		lastCheckedNode := n.root[i+1]
+
+		if node != nil {
+			insert := *node <= value
+
+			if lastCheckedNode == nil {
+				n.root[i+1] = node
+				n.root[i] = nil
+			}
+
+			if insert { //Node should be smaller if we insert it like 1, 2, node, value, 5
+				n.root[i] = &value
+				break
+			}
+		}
+	}
+}
