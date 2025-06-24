@@ -20,13 +20,17 @@ func (n *Node) insert(value int) {
 		}
 
 		if n.root[1] == nil {
-			n.root[0] = &value //Start node can have one element.
+			n.root[1] = &value
 			return
 		}
 	}
 
-	var rootLen = len(n.root)
-	fmt.Printf("Node size: %d\n", rootLen)
+	if n.hasSpaceInRoot() {
+		fmt.Println("HAS SPACE IN ROOT")
+	}
+
+	//var rootLen = len(n.root)
+	fmt.Println(n.root)
 }
 
 func (n *Node) hasSpaceInRoot() bool {
@@ -51,7 +55,14 @@ func (n *Node) insertIntoRootArr(value int) {
 	}
 }
 
+/*
+Shift the array and insert the value.
+*/
 func (n *Node) shift(value int) {
+	if !n.hasSpaceInRoot() {
+		return
+	}
+
 	for i := len(n.root) - 2; i >= 0; i-- {
 		node := n.root[i]
 		lastCheckedNode := n.root[i+1]
@@ -70,4 +81,17 @@ func (n *Node) shift(value int) {
 			}
 		}
 	}
+}
+
+func (n *Node) fits(value int) bool {
+	for i := len(n.root) - 2; i >= 0; i-- {
+		node := n.root[i]
+		insert := *node <= value
+
+		if insert {
+			return true
+		}
+	}
+
+	return false
 }
