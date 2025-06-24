@@ -19,6 +19,12 @@ func (n *Node) insert(value int) {
 			return
 		}
 
-	var rootLen = len(node.root)
+		if n.root[1] == nil {
+			n.root[0] = &value //Start node can have one element.
+			return
+		}
+	}
+
+	var rootLen = len(n.root)
 	fmt.Printf("Node size: %d\n", rootLen)
 }
