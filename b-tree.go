@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // How big is the root array?
 const rootSize = 4
@@ -25,8 +28,8 @@ func (n *Node) insert(value int) {
 		}
 	}
 
-	if n.hasSpaceInRoot() {
-		fmt.Println("HAS SPACE IN ROOT")
+	if n.hasSpaceInRoot() { //Insert value into the array if the array has space.
+		_ = n.shift(value)
 	}
 
 	//var rootLen = len(n.root)
@@ -43,24 +46,12 @@ func (n *Node) hasSpaceInRoot() bool {
 	return false
 }
 
-func (n *Node) insertIntoRootArr(value int) {
-	if n.hasSpaceInRoot() {
-		for i := 0; i < len(n.root); i++ {
-			arrValue := n.root[i] //5
-
-			if value >= *arrValue { //insert
-
-			}
-		}
-	}
-}
-
 /*
-Shift the array and insert the value.
+Shift the array and put the value in the array.
 */
-func (n *Node) shift(value int) {
+func (n *Node) shift(value int) error {
 	if !n.hasSpaceInRoot() {
-		return
+		return nil
 	}
 
 	for i := len(n.root) - 2; i >= 0; i-- {
@@ -81,6 +72,9 @@ func (n *Node) shift(value int) {
 			}
 		}
 	}
+
+	//MUST FULL
+	return errors.New("failed to insert value")
 }
 
 func (n *Node) fits(value int) bool {
